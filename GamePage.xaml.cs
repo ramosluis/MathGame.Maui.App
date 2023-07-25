@@ -21,15 +21,6 @@ public partial class GamePage : ContentPage
 
     private void CreateNewQuestion()
     {
-        var gameOperand = GameType switch
-        {
-            "Addition" => "+",
-            "Subtraction" => "-",
-            "Multiplication" => "*",
-            "Division" => "/",
-            _ => ""
-        };
-
         var random = new Random();
 
         firstNumber = GameType != "Division" ? random.Next(1, 9) : random.Next(1, 99);
@@ -44,7 +35,7 @@ public partial class GamePage : ContentPage
             }
         }
 
-        QuestionLabel.Text = $"{firstNumber} {gameOperand} {secondNumber}";
+        QuestionLabel.Text = $"{firstNumber} {GameType} {secondNumber}";
     }
 
     private void OnAnswerSubmitted(object sender, EventArgs e)
@@ -54,16 +45,16 @@ public partial class GamePage : ContentPage
 
         switch (GameType)
         {
-            case "Addition":
+            case "+":
                 isCorrect = answer == firstNumber + secondNumber;
                 break;
-            case "Subtraction":
+            case "-":
                 isCorrect = answer == firstNumber - secondNumber;
                 break;
-            case "Multiplication":
+            case "×":
                 isCorrect = answer == firstNumber * secondNumber;
                 break;
-            case "Division":
+            case "÷":
                 isCorrect = answer == firstNumber / secondNumber;
                 break;
         }
@@ -86,10 +77,10 @@ public partial class GamePage : ContentPage
     {
         GameOperation gameOperation = GameType switch
         {
-            "Addition" => GameOperation.Addition,
-            "Subtraction" => GameOperation.Subtraction,
-            "Multiplication" => GameOperation.Multiplication,
-            "Division" => GameOperation.Division,
+            "+" => GameOperation.Addition,
+            "-" => GameOperation.Subtraction,
+            "×" => GameOperation.Multiplication,
+            "÷" => GameOperation.Division,
         };
 
         QuestionArea.IsVisible = false;
